@@ -2,9 +2,11 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || 'localhost';
 
 const storage = multer.diskStorage({
     destination: './uploads/',
@@ -96,6 +98,10 @@ if (!fs.existsSync('public')) fs.mkdirSync('public');
 if (!fs.existsSync('uploads')) fs.mkdirSync('uploads');
 if (!fs.existsSync('data')) fs.mkdirSync('data');
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+// app.listen(PORT, () => {
+//     console.log(`Server running on http://localhost:${PORT}`);
+// });
+
+app.listen(PORT, HOST, () => {
+    console.log(`Server running on http://${HOST}:${PORT}`);
 });
