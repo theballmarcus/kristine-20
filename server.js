@@ -20,6 +20,7 @@ const upload = multer({ storage });
 app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const DATA_FILE = './data/messages.json';
 
@@ -37,10 +38,9 @@ const saveMessages = (messages) => {
 app.get('/', (req, res) => {
     console.log('GET /');
     const messages = loadMessages();
-    console.log(messages)
     let html = fs.readFileSync(path.join(__dirname, 'assets', 'index.html'), 'utf-8');
     let messagesHtml = '';
-    messages.forEach(msg => {
+    messages.filter((msg) => msg.show != false).forEach(msg => {
         messagesHtml += `<div class="message-card">
         <h2>${msg.name}</h2>
         <div class="pictures">`;
@@ -48,7 +48,36 @@ app.get('/', (req, res) => {
         messagesHtml += `<img src="/uploads/${img}" style="max-width:200px; margin:5px;">`;
         });
         messagesHtml += `<p>${msg.message}</p>
-        </div></div>`;
+        </div>
+        <div class="edit-remove">
+            <button onclick="editMessage(\`${msg.name}\`, \`${msg.message}\`)">✏️ Edit</button>
+            <button onclick="removeMessage(\`${msg.name}\`)">❌ Remove</button>
+        </div>
+        </div>`;
+    });
+    html = html.replace('<!-- MESSAGES -->', messagesHtml);
+    res.send(html);
+});
+
+app.get('/removed_messages', (req, res) => {
+    console.log('GET /removed_messages');
+    const messages = loadMessages();
+    let html = fs.readFileSync(path.join(__dirname, 'assets', 'index.html'), 'utf-8');
+    let messagesHtml = '';
+    messages.filter((msg) => msg.show == false).forEach(msg => {
+        messagesHtml += `<div class="message-card">
+        <h2>${msg.name}</h2>
+        <div class="pictures">`;
+        msg.images.forEach(img => {
+        messagesHtml += `<img src="/uploads/${img}" style="max-width:200px; margin:5px;">`;
+        });
+        messagesHtml += `<p>${msg.message}</p>
+        </div>
+        <div class="edit-remove">
+            <button onclick="editMessage(\`${msg.name}\`, \`${msg.message}\`)">✏️ Edit</button>
+            <button onclick="removeMessage(\`${msg.name}\`)">❌ Remove</button>
+        </div>
+        </div>`;
     });
     html = html.replace('<!-- MESSAGES -->', messagesHtml);
     res.send(html);
@@ -58,49 +87,45 @@ app.get('/add', (req, res) => {
     res.sendFile(path.join(__dirname, 'assets', 'add.html'));
 });
 
-app.post('/add', upload.array('images', 5), (req, res) => {
+app.post('/add', upload.array('images', 10), (req, res) => {
     const { name, message } = req.body;
     const images = req.files.map(file => file.filename);
     const messages = loadMessages();
 
-    // Check if a message with the same name already exists
     const existingMessageIndex = messages.findIndex(msg => msg.name === name);
 
     if (existingMessageIndex !== -1) {
-        // If the name exists, replace the message data
         messages[existingMessageIndex] = { name, message, images };
     } else {
-        // If the name doesn't exist, add a new message
         messages.push({ name, message, images, "show" : true });
     }
 
-    // Save the updated messages
     saveMessages(messages);
     res.redirect('/');
 });
 
-app.post('/delete', (req, res) => {
+app.post('/remove', (req, res) => {
+    console.log('POST /remove');
     const { name } = req.body;
     const messages = loadMessages();
-    // Add a comment to ignore that message in the json file
+
     const updatedMessages = messages.map(msg => {
         if (msg.name === name) {
+
             return { ...msg, "show": false };
         }
         return msg;
     });
     saveMessages(updatedMessages);
-    res.redirect('/');
+    // respond with success status
+    res.status(200).send('OK');
+
 });
 
 if (!fs.existsSync('assets')) fs.mkdirSync('assets');
 if (!fs.existsSync('public')) fs.mkdirSync('public');
 if (!fs.existsSync('uploads')) fs.mkdirSync('uploads');
 if (!fs.existsSync('data')) fs.mkdirSync('data');
-
-// app.listen(PORT, () => {
-//     console.log(`Server running on http://localhost:${PORT}`);
-// });
 
 app.listen(PORT, HOST, () => {
     console.log(`Server running on http://${HOST}:${PORT}`);
