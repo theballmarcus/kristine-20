@@ -71,8 +71,9 @@ app.get('/removed_messages', (req, res) => {
         msg.images.forEach(img => {
         messagesHtml += `<img src="/uploads/${img}" style="max-width:200px; margin:5px;">`;
         });
-        messagesHtml += `<p>${msg.message}</p>
+        messagesHtml += `
         </div>
+        <p>${msg.message}</p>
         <div class="edit-remove">
             <button onclick="editMessage(\`${msg.name}\`, \`${msg.message}\`)">✏️ Edit</button>
             <button onclick="removeMessage(\`${msg.name}\`)">❌ Remove</button>
