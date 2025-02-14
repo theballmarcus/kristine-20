@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 20th Birthday</title>
+  <style>
+body {
+      font-family: Arial, sans-serif;
+      background-color: #330000; /* Dark red background */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    h1 {
+      color: #ff4d4d; /* Bright red color */
+      font-size: 3rem;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 8px rgba(255, 77, 77, 0.5);
+    }
+
+    a {
+      color: #ff4d4d;
+      font-size: 1.2rem;
+      text-decoration: none;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      border: 2px solid #ff4d4d;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #ff4d4d;
+      color: white;
+    }
+
+    .message-container {
+      width: 90%;
+      max-width: 1000px;
+      margin-top: 20px;
+    }
+
+    .message-card {
+      background-color: #4d0000;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(255,77,77,0.3);
+      margin-bottom: 20px;
+      border-left: 5px solid #ff4d4d;
+      color: #fff;
+    }
+
+    /* Balloon Image */
+    .balloon {
+      width: 120px;
+      height: 160px;
+      background-image: url('https://via.placeholder.com/120x160/ff1493/ffffff?text=🎈'); /* Placeholder balloon */
+      background-size: cover;
+      background-position: center;
+      margin-top: 20px;
+    }
+
+    /* Confetti/Star Effect - Moved further from sides */
+    .confetti {
+      position: absolute;
+      top: 20%;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .confetti-left,
+    .confetti-right {
+      position: absolute;
+      top: 0;
+      font-size: 2rem;
+    }
+
+    .confetti-left {
+      left: 5%;  /* Move further from the left side */
+      animation: confetti-fall-left 2s ease-in-out infinite;
+    }
+
+    .confetti-right {
+      right: 5%; /* Move further from the right side */
+      animation: confetti-fall-right 2s ease-in-out infinite;
+    }
+
+    @keyframes confetti-fall-left {
+      0% { transform: translateY(-10px) rotate(0); opacity: 1; }
+      50% { transform: translateY(100px) rotate(180deg); opacity: 0.7; }
+      100% { transform: translateY(200px) rotate(360deg); opacity: 1; }
+    }
+
+    @keyframes confetti-fall-right {
+      0% { transform: translateY(-10px) rotate(0); opacity: 1; }
+      50% { transform: translateY(100px) rotate(180deg); opacity: 0.7; }
+      100% { transform: translateY(200px) rotate(360deg); opacity: 1; }
+    }
+
+    /* Extra Confetti Styling */
+    .confetti-left span, .confetti-right span {
+      display: inline-block;
+      animation-duration: 3s;
+    }
+
+    .confetti-left span:nth-child(1) { animation-delay: 0s; }
+    .confetti-left span:nth-child(2) { animation-delay: 0.2s; }
+    .confetti-left span:nth-child(3) { animation-delay: 0.4s; }
+    .confetti-right span:nth-child(1) { animation-delay: 0.6s; }
+    .confetti-right span:nth-child(2) { animation-delay: 0.8s; }
+    .confetti-right span:nth-child(3) { animation-delay: 1s; }
+
+    /* Placeholder Image of Her */
+    .placeholder-image {
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background-image: url('/Kristine_add.JPG'); /* Replace with actual image of her */
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy 20th Birthday, Kristine!</h1>
+  <a href="/add">Add a Message</a>
+  
+  <!-- Placeholder Image of Her -->
+  <div class="placeholder-image"></div>
+
+  <!-- Confetti/Stars (Moved further from the sides) -->
+  <div class="confetti">
+    <div class="confetti-left">
+      <span>🎉</span>
+      <span>✨</span>
+      <span>🎊</span>
+    </div>
+    <div class="confetti-right">
+      <span>🎈</span>
+      <span>🌟</span>
+      <span>🎆</span>
+    </div>
+  </div>
+  
+  <div class="message-container">
+    <!-- Placeholder Message -->
+    <!-- <div class="message-card">
+      <h2>John Doe</h2>
+      <div class="pictures">
+        <img src="https://via.placeholder.com/80" alt="Image 1">
+        <img src="https://via.placeholder.com/80" alt="Image 2">
+      </div>
+      <p>This is such a special day, and I'm so lucky to know you! Wishing you the happiest 20th birthday ever. May this year be filled with love, laughter, and endless memories. I’m always here for you, and I hope this year brings everything you’ve dreamed of and more. Love you tons! 🎉🎂💖</p>
+    </div> -->
+  <!-- MESSAGES -->
+  </div>
+
+  <!-- Static Balloon Image -->
+  <div class="balloon"></div>
+</body>
+</html>
