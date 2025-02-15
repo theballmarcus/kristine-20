@@ -39,6 +39,12 @@ const checkAdmin = (req, res, next) => {
     next();
 };
 
+const cookieOptions = {
+    httpOnly: true,
+    sameSite: 'Strict',
+    secure: process.env.NODE_ENV === 'production',
+  };
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || 'localhost';
@@ -163,10 +169,7 @@ app.post('/admin/login', (req, res) => {
         password
     } = req.body;
     if (password === ADMIN_PASSWORD) {
-        res.cookie('admin', ADMIN_PASSWORD, {
-            httpOnly: true,
-            secure: true
-        });
+        res.cookie('admin', ADMIN_PASSWORD, cookieOptions);
         res.redirect('/admin');
     } else {
         res.status(401).send('Invalid password');
