@@ -167,7 +167,7 @@ app.post('/admin/login', (req, res) => {
             httpOnly: true,
             secure: true
         });
-        res.status(200).send('Logged in successfully');
+        res.redirect('/admin');
     } else {
         res.status(401).send('Invalid password');
     }
