@@ -141,8 +141,11 @@
         <label for="message">Message:</label>
         <textarea id="message" name="message" required></textarea>
 
-        <label for="images">Add Pictures:</label>
-        <input type="file" id="images" name="images" multiple>
+        <label for="public_images">Public Pictures (Will be showed on main page, max 10 images):</label>
+        <input type="file" id="public_images" name="public_images" multiple>
+
+        <label for="private_images">Private Pictures (Will only be seen by Kristine, max 10 images):</label>
+        <input type="file" id="private_images" name="private_images" multiple>
 
         <input type="submit" value="Add Message">
     </form>

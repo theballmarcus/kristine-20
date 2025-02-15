@@ -43,6 +43,15 @@
             color: white;
         }
 
+        .text {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #580000;
+            text-align: center;
+            border-radius: 10px;
+        }
+
         .message-container {
             width: 90%;
             max-width: 1000px;
@@ -173,6 +182,7 @@
             background-size: cover;
             background-position: center;
             margin-bottom: 20px;
+            overflow: hidden;
         }
 
         .edit-remove {
@@ -217,7 +227,23 @@
     </div>
 
     <div class="message-container">
+        <div class="text">
+            <p>Hi Kristine! 🎉</p>
+            <p>Happy 20th Birthday on 22 of March! 🎂</p>
+            <p>Wishing you a day filled with love, joy, and happiness. 🥳</p>
+            <p>May all your dreams and wishes come true. 🌟</p>
+            <p>Enjoy your special day! 🎈</p>
+            <p>Here is a composted list of your closest ones ❤️</p>
+        </div>
         <!-- MESSAGES -->
+    </div>
+
+    <div class="admin_login">
+        <p>Admin login</p>
+        <form action="/admin/login" method="POST">
+            <input type="password" name="password" placeholder="Enter Admin Password" required>
+            <input type="submit" value="Login">
+        </form>
     </div>
 
     <div class="balloon"></div>
