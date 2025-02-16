@@ -199,13 +199,14 @@ app.post('/add', upload.fields([{
     const existingMessageIndex = messages.findIndex(msg => msg.name === name);
 
     if (existingMessageIndex !== -1) {
-        messages[existingMessageIndex] = {
-            name,
-            message,
-            publicImages,
-            privateImages,
-            "show": true
-        };
+        if (publicImages.length > 0) {
+            messages[existingMessageIndex].publicImages = publicImages;
+        }
+        if (privateImages.length > 0) {
+            messages[existingMessageIndex].privateImages = privateImages;
+        }
+        messages[existingMessageIndex].message = message;
+        messages[existingMessageIndex].show = true
     } else {
         messages.push({
             name,
