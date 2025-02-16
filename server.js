@@ -85,7 +85,7 @@ app.get('/', checkAdmin, async (req, res) => {
     });
     messages.filter((msg) => msg.show != false).forEach(msg => {
         messagesHtml += `<div class="message-card">
-        <h2>${msg.name}</h2>
+        <h2>Letter from: ${msg.name}</h2>
         <div class="pictures">`;
         console.log(msg);
         if (msg.publicImages) {
@@ -140,7 +140,7 @@ app.get('/admin', checkAdmin, (req, res) => {
     let messagesHtml = '';
     messages.forEach(msg => {
         messagesHtml += `<div class="message-card">
-        <h2>${msg.name}</h2>
+        <h2>Letter from: ${msg.name}</h2>
         <div class="pictures">`;
         if (msg.publicImages) {
             msg.publicImages.forEach(img => {
@@ -154,7 +154,7 @@ app.get('/admin', checkAdmin, (req, res) => {
         }
         messagesHtml += `
         </div>
-        <p>Letter from: ${msg.message}</p>
+        <p>${msg.message}</p>
         <div class="edit-remove">
             <button onclick="editMessage(\`${msg.name}\`, \`${msg.message}\`)">✏️ Edit</button>
             <button onclick="removeMessage(\`${msg.name}\`)">❌ Remove</button>
