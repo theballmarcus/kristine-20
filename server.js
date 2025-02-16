@@ -112,7 +112,7 @@ app.get('/removed_messages', (req, res) => {
     let messagesHtml = '';
     messages.filter((msg) => msg.show == false).forEach(msg => {
         messagesHtml += `<div class="message-card">
-        <h2>${msg.name}</h2>
+        <h2>Letter from: ${msg.name}</h2>
         <div class="pictures">`;
         msg.public_images.forEach(img => {
             messagesHtml += `<img src="/uploads/${img}" style="max-width:200px; margin:5px;">`;
@@ -154,7 +154,7 @@ app.get('/admin', checkAdmin, (req, res) => {
         }
         messagesHtml += `
         </div>
-        <p>${msg.message}</p>
+        <p>Letter from: ${msg.message}</p>
         <div class="edit-remove">
             <button onclick="editMessage(\`${msg.name}\`, \`${msg.message}\`)">✏️ Edit</button>
             <button onclick="removeMessage(\`${msg.name}\`)">❌ Remove</button>
